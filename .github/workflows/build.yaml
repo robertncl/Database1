@@ -1,0 +1,29 @@
+name: Deploy to Azure SQL
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up .NET Core
+      uses: actions/setup-dotnet@v4.2.0
+      with:
+        dotnet-version: '9.0.x'
+
+    - name: Build project
+      run: dotnet build --configuration Release
+
+    - name: Deploy to Azure SQL
+      uses: Azure/sql-action@v1
+      with:
+        connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
+        server-name: testdatabase111.database.windows.net
+        database-name: testdatabase111
+        authentication-type: 'connection-string'
+        sql-file: 'path/to/your/sql/script.sql'
