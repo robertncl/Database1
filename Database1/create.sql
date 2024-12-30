@@ -1,6 +1,8 @@
 -- Use the test database
 USE testDB;
 
+drop TABLE IF EXISTS SampleTable;
+
 -- Create a sample table
 CREATE TABLE SampleTable (
     Id INT PRIMARY KEY,
