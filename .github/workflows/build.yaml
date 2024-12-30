@@ -26,6 +26,12 @@ jobs:
         $msbuildPath = &"C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe
         echo "MSBUILD_PATH=$msbuildPath" >> $env:GITHUB_ENV
 
+    - name: Find MSBuild
+      id: msbuild
+      run: |
+        $msbuildPath = &"C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe
+        echo "MSBUILD_PATH=$msbuildPath" >> $env:GITHUB_ENV
+
     - name: Build project
       shell: pwsh
       run: |
@@ -37,8 +43,7 @@ jobs:
         client-id: ${{ secrets.AZURE_CLIENT_ID }}
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-        auth-type: oidc
-
+        client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
 
     - name: Deploy to Azure SQL
       uses: Azure/sql-action@v2.3
