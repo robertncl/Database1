@@ -43,9 +43,6 @@ jobs:
       uses: Azure/sql-action@v2.3
       with:
         connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
-        server-name: testdatabase111.database.windows.net
-        database-name: testdatabase111
-        authentication-type: 'connection-string'
-        sql-file: 'Database1/create.sql'
-
-
+        path: './Database1/create.sql'
+        action: 'publish'
+        arguments: '/p:IncludeCompositeObjects=True'
