@@ -16,6 +16,12 @@ jobs:
       with:
         dotnet-version: '9.0.x'
 
+    - name: Set up MSBuild
+      run: |
+        echo "##[group]Setup MSBuild"
+        "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsDevCmd.bat"
+        echo "##[endgroup]"
+
     - name: Build project
       run: msbuild /p:Configuration=Release
 
