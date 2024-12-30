@@ -16,14 +16,14 @@ jobs:
       with:
         dotnet-version: '9.0.x'
 
-    - name: Set up MSBuild
+    - name: Find MSBuild
+      id: msbuild
       run: |
-        echo "##[group]Setup MSBuild"
-        "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsDevCmd.bat"
-        echo "##[endgroup]"
+        $msbuildPath = &"C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe
+        echo "MSBUILD_PATH=$msbuildPath" >> $GITHUB_ENV
 
     - name: Build project
-      run: msbuild /p:Configuration=Release
+      run: $env:MSBUILD_PATH /p:Configuration=Release
 
     - name: Deploy to Azure SQL
       uses: Azure/sql-action@v2.3
