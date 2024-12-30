@@ -43,6 +43,6 @@ jobs:
       uses: Azure/sql-action@v2.3
       with:
         connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
-        path: 'D:\a\Database1\Database1\create.sql'
+        path: './Database1/create.sql'
         action: 'publish'
         arguments: '/p:IncludeCompositeObjects=True'
