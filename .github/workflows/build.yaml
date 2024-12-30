@@ -20,10 +20,13 @@ jobs:
       id: msbuild
       run: |
         $msbuildPath = &"C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe
-        echo "MSBUILD_PATH=$msbuildPath" >> $GITHUB_ENV
+        echo "MSBUILD_PATH=$msbuildPath" >> $env:GITHUB_ENV
 
     - name: Build project
-      run: $env:MSBUILD_PATH /p:Configuration=Release
+      shell: pwsh
+      run: |
+        & $env:MSBUILD_PATH /p:Configuration=Release
+
 
     - name: Deploy to Azure SQL
       uses: Azure/sql-action@v2.3
