@@ -1,8 +1,5 @@
--- Create the test database
-CREATE DATABASE TestDatabase;
-
 -- Use the test database
-USE TestDatabase;
+USE testDB;
 
 -- Create a sample table
 CREATE TABLE SampleTable (
