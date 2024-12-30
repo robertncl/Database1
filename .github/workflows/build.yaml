@@ -27,3 +27,5 @@ jobs:
         database-name: testdatabase111
         authentication-type: 'connection-string'
         sql-file: 'path/to/your/sql/script.sql'
+
+
